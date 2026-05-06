@@ -1,3 +1,4 @@
+import "./style.css";
 import Registration from "./pages/Registration";
 
 function App() {
@@ -5,3 +6,4 @@ function App() {
 }
 
 export default App;
+

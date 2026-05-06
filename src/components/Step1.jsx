@@ -1,26 +1,41 @@
 // components/Step1.jsx
 export default function Step1({ setStep, formData, setFormData }) {
-
   const handleNext = () => {
-    if (formData.mobile.length !== 10) {
-      alert("Invalid mobile");
+    if (!/^[0-9]{10}$/.test(formData.mobile)) {
+      alert("Please enter a valid 10-digit mobile number.");
       return;
     }
     setStep(2);
   };
 
   return (
-    <div>
-      <h2>Enter Mobile</h2>
+    <div className="card">
+      <p className="step-label">STEP 01 OF 03</p>
+      <h2 className="card-title">Enter Mobile No.</h2>
 
+      <label htmlFor="mobile" className="input-label">MOBILE NO</label>
       <input
-        placeholder="Mobile Number"
+        id="mobile"
+        className="text-input"
+        placeholder="XXXXX XXXXX"
+        maxLength={10}
+        value={formData.mobile}
         onChange={(e) =>
-          setFormData({ ...formData, mobile: e.target.value })
+          setFormData({
+            ...formData,
+            mobile: e.target.value.replace(/\D/g, ""),
+          })
         }
       />
 
-      <button onClick={handleNext}>Verify</button>
+      <p className="hint-text">Check your registration receipt for ID format</p>
+      <button type="button" className="primary-btn" onClick={handleNext}>
+        Verify Details →
+      </button>
+
+      <p className="bottom-note">
+        If you are new, install the Career Rocket App. Enter your number to continue quickly.
+      </p>
     </div>
   );
 }
